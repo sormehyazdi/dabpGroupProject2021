@@ -7,7 +7,7 @@ Purpose: POD site allocation
     - 1100 blocks
     - 47 possible PODs
     - hours each POD is available = 12
-    - people per vehicle = 4
+    - people per vehicle = 3
     - each POD can serve 7 cars per hour
 """
 
@@ -36,22 +36,22 @@ def define_parameters():
     budget = 1000000000000
 
     #distance = pd.read_csv('Distances.csv', header=None, sep=',')
-    distance = genfromtxt(PATH + '/Distances.csv', delimiter=',') 
+    distance = genfromtxt(path + '/Distances.csv', delimiter=',') 
 
     #population = pd.read_csv('Populations.csv', header=None, sep=',')
-    population = genfromtxt(PATH + '/Populations.csv', delimiter=',') 
+    population = genfromtxt(path + '/Populations.csv', delimiter=',') 
     #population = population.astype(float)
 
 
     #loadingSites = pd.read_csv('LoadingSites.csv', header=None, sep=',')
-    loadingSites = genfromtxt(PATH + '/LoadingSites.csv', delimiter=',') 
+    loadingSites = genfromtxt(path + '/LoadingSites.csv', delimiter=',') 
     capacity = loadingSites * hoursOpen * peoplePerCar * carsPerHour
 
     #supplies = pd.read_csv('Supplies.csv', header=None, sep=',')
-    supplies = genfromtxt(PATH + '/Supplies.csv', delimiter=',') 
+    supplies = genfromtxt(path + '/Supplies.csv', delimiter=',') 
 
     #labor = pd.read_csv('Labor.csv', header=None, sep=',')
-    labor = genfromtxt(PATH + '/Labor.csv', delimiter=',') 
+    labor = genfromtxt(path + '/Labor.csv', delimiter=',') 
     cost = labor + (supplies.sum()*loadingSites*hoursOpen*carsPerHour)
 
     return(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost)
