@@ -31,9 +31,9 @@ def define_parameters():
 
     hoursOpen = 12
     peoplePerCar = 3
-    carsPerHour = 6
+    carsPerHourPerLoading = 6
 
-    budget = 1000000000000
+    budget = 1000000000000 # make this a vector of values
 
     #distance = pd.read_csv('Distances.csv', header=None, sep=',')
     distance = genfromtxt(path + '/Distances.csv', delimiter=',') 
@@ -45,7 +45,7 @@ def define_parameters():
 
     #loadingSites = pd.read_csv('LoadingSites.csv', header=None, sep=',')
     loadingSites = genfromtxt(path + '/LoadingSites.csv', delimiter=',') 
-    capacity = loadingSites * hoursOpen * peoplePerCar * carsPerHour
+    capacity = loadingSites * hoursOpen * peoplePerCar * carsPerHourPerLoading
 
     #supplies = pd.read_csv('Supplies.csv', header=None, sep=',')
     supplies = genfromtxt(path + '/Supplies.csv', delimiter=',') 
