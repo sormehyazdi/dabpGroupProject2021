@@ -103,9 +103,14 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
             if(x1[i].x > 0):
                 lst_np[i,k] = distance[k,i]*y1[i,k].x
                 lst.append((budget, opening_cost, i, k, distance[k,i]*y1[i,k].x))
-                block_dist.append((k, distance[k,i]*y1[i,k].x))
+
                 #long_ls_vals.append((budget, opening_cost, m1.objVal, i, x1[i].x, k, distance[k,i]*y1[i,k].x))
         pod_days.append((i, x1[i].x))
+
+    for k in blocks:
+        for i in pod_sites:
+            if(y1[i, k].x > 0):
+                block_dist.append((k, distance[k,i]*y1[i,k].x)) 
     
     # Print optimized solution
     print(m1.objVal)
@@ -117,9 +122,9 @@ def run_scenario_one():
 
     ## Setting up some parameters that will be looped through the main function
     opening_cost = [5000, 10000, 25000, 50000, 75000, 100000]
-    budget = [1000000, 2500000, 5000000, 10000000, 15000000]
+    #budget = [1000000, 2500000, 5000000, 10000000, 15000000]
     #budget = [15000000]
-    #budget = [62500000, 125000000, 250000000]
+    budget = [62500000, 125000000, 250000000]
     bigM = 100000000000000000000 ## This is our big M
 
     ## Define Parameters
@@ -143,13 +148,15 @@ def run_scenario_one():
             ## First we make a list of the budget, opening cost, and optimal solution for that pair
                 s1_m1_optsoln.append((b, op_co, m1_opt_solution))
             ## List of Tuples #2
-                m1_pods = ((b, op_co, pod[0], pod[1]) for pod in pod_days)
-                s1_m1_pods.extend(m1_pods)
-                m1_dist = ((b, op_co, bdist[0], bdist[1]) for bdist in block_dist)
-                s1_m1_dist.extend(m1_dist)
+                m1_pods = [(b, op_co, pod[0], pod[1]) for pod in pod_days]
+                #s1_m1_pods.extend(m1_pods)
+                s1_m1_pods = s1_m1_pods + m1_pods
+                m1_dist = [(b, op_co, bdist[0], bdist[1]) for bdist in block_dist]
+                #s1_m1_dist.extend(m1_dist)
+                s1_m1_dist = s1_m1_dist + m1_dist
 
             except AttributeError:
-                bad_options.append(b)
+                bad_options.append((b, op_co))
                 print("*** Budget", b, "with opening cost", op_co, "was infeasible...moving on...")
                 continue
 
