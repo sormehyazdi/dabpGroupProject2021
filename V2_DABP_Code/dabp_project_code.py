@@ -77,7 +77,8 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
     ### Constraints
     ## all pod sites are bounded by a given capacity
     for i in pod_sites:
-        m1.addConstr(sum(y1[i, k]*population[k] for k in blocks) <= capacity[i]*x1[i])
+        #m1.addConstr(sum(y1[i, k]*population[k] for k in blocks) <= capacity[i]*x1[i])
+        m1.addConstr(sum(y1[i, k]*population[k] for k in blocks) == capacity[i]*x1[i])
         m1.addConstr(z1[i]*bigM >= x1[i])
         m1.addConstr(x1[i] <= max_days_open)
      
@@ -110,7 +111,7 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
     for k in blocks:
         for i in pod_sites:
             if(y1[i, k].x > 0):
-                block_dist.append((k, distance[k,i]*y1[i,k].x)) 
+                block_dist.append((k, distance[k,i]*y1[i,k].x, i)) 
     
     # Print optimized solution
     print(m1.objVal)
@@ -151,7 +152,7 @@ def run_scenario_one():
                 m1_pods = [(b, op_co, pod[0], pod[1]) for pod in pod_days]
                 #s1_m1_pods.extend(m1_pods)
                 s1_m1_pods = s1_m1_pods + m1_pods
-                m1_dist = [(b, op_co, bdist[0], bdist[1]) for bdist in block_dist]
+                m1_dist = [(b, op_co, bdist[0], bdist[1], bdist[2]) for bdist in block_dist]
                 #s1_m1_dist.extend(m1_dist)
                 s1_m1_dist = s1_m1_dist + m1_dist
 
@@ -162,7 +163,7 @@ def run_scenario_one():
 
     s1_m1_opt_vals_df = pd.DataFrame(s1_m1_optsoln, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
     s1_m1_pods_df = pd.DataFrame(s1_m1_pods, columns = ['Budget', 'Cost', 'POD', 'Days Open'])
-    s1_m1_dist_df = pd.DataFrame(s1_m1_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)'])
+    s1_m1_dist_df = pd.DataFrame(s1_m1_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)', 'DesignatedPOD'])
     #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
 
     ## Save these to csv so that plotting can be done without running everything
