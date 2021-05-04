@@ -122,9 +122,9 @@ def run_scenario_one():
 
     ## Setting up some parameters that will be looped through the main function
     opening_cost = [5000, 10000, 25000, 50000, 75000, 100000]
-    #budget = [1000000, 2500000, 5000000, 10000000, 15000000]
+    budget = [1000000, 2500000, 5000000, 10000000, 15000000]
     #budget = [15000000]
-    budget = [62500000, 125000000, 250000000]
+    #budget = [62500000, 125000000, 250000000]
     bigM = 100000000000000000000 ## This is our big M
 
     ## Define Parameters
