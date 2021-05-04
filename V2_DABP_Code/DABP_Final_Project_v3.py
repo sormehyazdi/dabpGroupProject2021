@@ -102,7 +102,7 @@ for b in budget:
         lst_6.append(lst_np)
     except AttributeError:
         options.append(b)
-        print("This was infeasible...moving on...")
+        print(b, "was infeasible...moving on...")
         continue
 print(lst_6)
 print("infeasible values were:", options)
