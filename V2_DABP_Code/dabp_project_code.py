@@ -206,6 +206,7 @@ def run_scenario_one(opening_cost, budget, bigM):
     for b in budget:
         for op_co in opening_cost:
             try:
+                print("*********** We are at budget:", b)
             ### Model 1
                 (m1_opt_solution, lst, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, 
                     population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
@@ -221,7 +222,26 @@ def run_scenario_one(opening_cost, budget, bigM):
                 m1_dist = [(b, op_co, bdist[0], bdist[1], bdist[2]) for bdist in block_dist]
                 #s1_m1_dist.extend(m1_dist)
                 s1_m1_dist = s1_m1_dist + m1_dist
+            except AttributeError:
+                bad_options.append((b, op_co))
+                print("*** Budget", b, "with opening cost", op_co, "was infeasible...moving on...")
+                continue
+    
+    ### Model 1
+    s1_m1_opt_vals_df = pd.DataFrame(s1_m1_optsoln, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
+    s1_m1_pods_df = pd.DataFrame(s1_m1_pods, columns = ['Budget', 'Cost', 'POD', 'Days Open'])
+    s1_m1_dist_df = pd.DataFrame(s1_m1_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)', 'DesignatedPOD'])
+    #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
 
+    ## Save these to csv so that plotting can be done without running everything
+    s1_m1_opt_vals_df.to_csv('s1_m1_optimalVals.csv', encoding = 'utf-8')
+    s1_m1_pods_df.to_csv('s1_m1_podDays.csv', encoding = 'utf-8')
+    s1_m1_dist_df.to_csv('s1_m1_blockDistances.csv', encoding = 'utf-8')
+
+    for b in budget:
+        for op_co in opening_cost:
+            try:
+                print("*********** We are at budget:", b)
             ### Model 2
                 (m2_opt_solution, pod_days_m2, block_dist_m2) = min_max_distance(pod_sites, blocks, distance, 
                     population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
@@ -243,16 +263,6 @@ def run_scenario_one(opening_cost, budget, bigM):
                 print("*** Budget", b, "with opening cost", op_co, "was infeasible...moving on...")
                 continue
 
-    ### Model 1
-    s1_m1_opt_vals_df = pd.DataFrame(s1_m1_optsoln, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
-    s1_m1_pods_df = pd.DataFrame(s1_m1_pods, columns = ['Budget', 'Cost', 'POD', 'Days Open'])
-    s1_m1_dist_df = pd.DataFrame(s1_m1_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)', 'DesignatedPOD'])
-    #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
-
-    ## Save these to csv so that plotting can be done without running everything
-    s1_m1_opt_vals_df.to_csv('s1_m1_optimalVals.csv', encoding = 'utf-8')
-    s1_m1_pods_df.to_csv('s1_m1_podDays.csv', encoding = 'utf-8')
-    s1_m1_dist_df.to_csv('s1_m1_blockDistances.csv', encoding = 'utf-8')
 
     ### Model 2
     s1_m2_opt_vals_df = pd.DataFrame(s1_m2_optsoln, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
@@ -269,9 +279,11 @@ def run_scenario_one(opening_cost, budget, bigM):
 
 def main():
     ## Setting up some parameters that will be looped through the main function
-    opening_cost = [5000, 10000, 25000, 50000, 75000, 100000]
+    #opening_cost = [5000, 10000, 25000, 50000, 75000, 100000]
+    opening_cost = [10000]
+    budget = [100000, 250000, 500000, 1000000, 1500000]
     #budget = [1000000, 2500000, 5000000, 10000000, 15000000]
-    budget = [15000000]
+    #budget = [15000000]
     #budget = [62500000, 125000000, 250000000]
     bigM = 100000000000000000000 ## This is our big M
 
