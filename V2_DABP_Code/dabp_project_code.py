@@ -53,7 +53,7 @@ def define_parameters():
 
     #labor = pd.read_csv('Labor.csv', header=None, sep=',')
     labor = genfromtxt(path + '/Labor.csv', delimiter=',') 
-    cost = labor*12 + (supplies.sum()*loadingSites*hoursOpen*carsPerHourPerLoading)
+    cost = labor*12 #+ (supplies.sum()*loadingSites*hoursOpen*carsPerHourPerLoading)
 
     return(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, max_days_open)
 
@@ -72,6 +72,7 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
     ### Objective function
     ## want to minimize the total/weighted travel distance of Allegheny's population
     m1.setObjective(sum(sum(distance[k,i]*population[k]*y1[i,k] for i in pod_sites) for k in blocks))
+    m1.modelSense = GRB.MINIMIZE
     
     ### Constraints
     ## all pod sites are bounded by a given capacity
@@ -92,57 +93,80 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
 
     lst = []
     lst_np = np.zeros([len(pod_sites), 1100])
+    pod_days = []
+    block_dist = []
+    #long_ls_vals = []
 
     for i in pod_sites:
         for k in blocks:
-            if(x1[i].x >= 0):
+            #if(x1[i].x >= 0): ## this will still print out all of them since weakly greater than 0.
+            if(x1[i].x > 0):
                 lst_np[i,k] = distance[k,i]*y1[i,k].x
-                lst.append((i, k, distance[k,i]*y1[i,k].x))
+                lst.append((budget, opening_cost, i, k, distance[k,i]*y1[i,k].x))
+                block_dist.append((k, distance[k,i]*y1[i,k].x))
+                #long_ls_vals.append((budget, opening_cost, m1.objVal, i, x1[i].x, k, distance[k,i]*y1[i,k].x))
+        pod_days.append((i, x1[i].x))
     
     # Print optimized solution
     print(m1.objVal)
 
-    return(m1.objVal, lst) 
+    return(m1.objVal, lst, pod_days, block_dist) 
 
 def run_scenario_one():
     ## Global epidemic in Allegheny county
 
     ## Setting up some parameters that will be looped through the main function
     opening_cost = [5000, 10000, 25000, 50000, 75000, 100000]
-    #budget = [1000000000, 2500000, 5000000, 10000000, 15000000, 20000000]
-    budget = [500000000, 1000000000]
+    budget = [1000000, 2500000, 5000000, 10000000, 15000000]
+    #budget = [15000000]
+    #budget = [62500000, 125000000, 250000000]
     bigM = 100000000000000000000 ## This is our big M
 
     ## Define Parameters
     (pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, max_days_open) = define_parameters()
     print("*** Set up parameters...")
 
-    scn1_model1_optimal_vals = []
+    s1_m1_optsoln = []
     good_options = []
     bad_options = []
+    s1_m1_pods = []
+    s1_m1_dist = []
+
     ## Loop through budget values, then opening cost to find optimal solutions 
     for b in budget:
         for op_co in opening_cost:
             try:
-                (m1_opt_solution, lst) = min_tot_distance(pod_sites, blocks, distance, 
+                (m1_opt_solution, lst, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, 
                     population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
                 good_options.append((m1_opt_solution, lst))
 
             ## First we make a list of the budget, opening cost, and optimal solution for that pair
-                scn1_model1_optimal_vals.append((b, op_co, m1_opt_solution))
+                s1_m1_optsoln.append((b, op_co, m1_opt_solution))
+            ## List of Tuples #2
+                m1_pods = ((b, op_co, pod[0], pod[1]) for pod in pod_days)
+                s1_m1_pods.extend(m1_pods)
+                m1_dist = ((b, op_co, bdist[0], bdist[1]) for bdist in block_dist)
+                s1_m1_dist.extend(m1_dist)
 
             except AttributeError:
                 bad_options.append(b)
                 print("*** Budget", b, "with opening cost", op_co, "was infeasible...moving on...")
                 continue
 
-    scn1_m1_optimal_vals_df = pd.DataFrame(scn1_model1_optimal_vals, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
+    s1_m1_opt_vals_df = pd.DataFrame(s1_m1_optsoln, columns = ['Budget', 'Cost', 'TotalTravel(mi)'])
+    s1_m1_pods_df = pd.DataFrame(s1_m1_pods, columns = ['Budget', 'Cost', 'POD', 'Days Open'])
+    s1_m1_dist_df = pd.DataFrame(s1_m1_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)'])
+    #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
 
-    return(scn1_m1_optimal_vals_df)
+    ## Save these to csv so that plotting can be done without running everything
+
+    return(s1_m1_opt_vals_df, s1_m1_pods_df, s1_m1_dist_df)
 
 def main():
-    optimal_vals_1 = run_scenario_one()
-    print("*** Scenario 1 - Model 1: \n", optimal_vals_1)
+    (s1_m1_opt_vals_df, s1_m1_pods_df, s1_m1_dist_df) = run_scenario_one()
+    print("*** Scenario 1 - Model 1 - Optimal Total Distance: \n", s1_m1_opt_vals_df)
+    print("*** Scenario 1 - Model 1 - POD Days Open: \n", s1_m1_pods_df)
+    print("*** Scenario 1 - Model 1 - Block Distance Traveled: \n", s1_m1_dist_df.head)
     
 
 if __name__ == '__main__':
