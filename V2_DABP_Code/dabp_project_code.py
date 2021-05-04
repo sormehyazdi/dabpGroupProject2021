@@ -159,6 +159,9 @@ def run_scenario_one():
     #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
 
     ## Save these to csv so that plotting can be done without running everything
+    s1_m1_opt_vals_df.to_csv('s1_m1_optimalVals.csv', encoding = 'utf-8')
+    s1_m1_pods_df.to_csv('s1_m1_podDays.csv', encoding = 'utf-8')
+    s1_m1_dist_df.to_csv('s1_m1_blockDistances.csv', encoding = 'utf-8')
 
     return(s1_m1_opt_vals_df, s1_m1_pods_df, s1_m1_dist_df)
 
