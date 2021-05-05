@@ -382,9 +382,9 @@ def run_scenario_two():
     s2_m2_dist_df = pd.DataFrame(s2_m2_dist, columns = ['Budget', 'Cost', 'Block', 'DistTravel(mi)', 'DesignatedPOD'])
 
     ## Save these to csv so that plotting can be done without running everything
-    s2_m2_opt_vals_df.to_csv(path + 's2_m2_optimalVals.csv', encoding = 'utf-8')
-    s2_m2_pods_df.to_csv(path + 's2_m2_podDays.csv', encoding = 'utf-8')
-    s2_m2_dist_df.to_csv(path + 's2_m2_blockDistances.csv', encoding = 'utf-8')
+    s2_m2_opt_vals_df.to_csv('s2_m2_optimalVals.csv', encoding = 'utf-8')
+    s2_m2_pods_df.to_csv('s2_m2_podDays.csv', encoding = 'utf-8')
+    s2_m2_dist_df.to_csv('s2_m2_blockDistances.csv', encoding = 'utf-8')
     print("Saved Scenario 2 model 2 dataframes to csv...")
 
     return(s2_m1_opt_vals_df, s2_m1_pods_df, s2_m1_dist_df, s2_m2_opt_vals_df, s2_m2_pods_df, s2_m2_dist_df)
@@ -396,7 +396,7 @@ def main():
     budget = [750000, 1000000, 1250000, 1500000, 1750000, 2000000, 2250000, 2500000, 5000000]
     
     bigM = 100000000000000000000 ## This is our big M
-    
+
     #### Scenario 1
     (s1_m1_opt_vals_df, s1_m1_pods_df, s1_m1_dist_df, s1_m2_opt_vals_df, s1_m2_pods_df, s1_m2_dist_df) = run_scenario_one(opening_cost, budget, bigM)
     ### Model 1
@@ -407,7 +407,7 @@ def main():
     print("*** Scenario 1 - Model 2 - Optimal Total Distance: \n", s1_m2_opt_vals_df)
     print("*** Scenario 1 - Model 2 - POD Days Open: \n", s1_m2_pods_df)
     print("*** Scenario 1 - Model 2 - Block Distance Traveled: \n", s1_m2_dist_df)
-    
+
     #### Scenario 2
     (s2_m1_opt_vals_df, s2_m1_pods_df, s2_m1_dist_df, s2_m2_opt_vals_df, s2_m2_pods_df, s2_m2_dist_df) = run_scenario_two()
     ### Model 1
