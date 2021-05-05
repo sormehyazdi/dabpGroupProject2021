@@ -59,7 +59,7 @@ def define_parameters():
 
     return(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, max_days_open, popDensity)
 
-def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open):
+def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open, popDensity):
     ####### MODEL 1
     m1 = gp.Model()
 
@@ -120,7 +120,7 @@ def min_tot_distance(pod_sites, blocks, distance, population, loadingSites, capa
 
     return(m1.objVal, lst, pod_days, block_dist)
 
-def min_max_distance(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open):
+def min_max_distance(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open, popDensity):
     ####### MODEL 2
     m2 = gp.Model()
 
@@ -256,7 +256,7 @@ def min_tot_distance_s3(pod_sites, blocks, distance, population, loadingSites, c
                 
     return(truePop, lst, pod_days, block_dist)
 
-def min_max_distance_s3(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open):
+def min_max_distance_s3(pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open, popDensity):
     ####### MODEL 2
     m2 = gp.Model()
 
@@ -329,7 +329,7 @@ def run_scenario_one(opening_cost, budget, bigM):
     ## Global epidemic in Allegheny county
 
     ## Define Parameters
-    (pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, max_days_open) = define_parameters()
+    (pod_sites, blocks, distance, population, loadingSites, capacity, supplies, labor, cost, max_days_open, popDensity) = define_parameters()
     print("*** Set up parameters...")
 
     s1_m1_optsoln = []
@@ -347,7 +347,7 @@ def run_scenario_one(opening_cost, budget, bigM):
             try:
             ### Model 1
                 (m1_opt_solution, lst, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, 
-                    population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
+                    population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open, popDensity)
                 good_options.append((m1_opt_solution, lst))
 
                 ## First we make a list of the budget, opening cost, and optimal solution for that pair
@@ -363,7 +363,7 @@ def run_scenario_one(opening_cost, budget, bigM):
 
             ### Model 2
                 (m2_opt_solution, pod_days_m2, block_dist_m2) = min_max_distance(pod_sites, blocks, distance, 
-                    population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
+                    population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open, popDensity)
                 good_options.append((m2_opt_solution))
 
                 ## First we make a list of the budget, opening cost, and optimal solution for that pair
@@ -423,7 +423,8 @@ def run_scenario_three(opening_cost, budget, bigM):
             try:
                 print("******* We are at budget:", b)
                 ### Model 1
-                (truePop, lst, pod_days, block_dist) = min_tot_distance_s3(blocks, distance, population, loadingSites, capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open, popDensity)
+                (truePop, lst, pod_days, block_dist) = min_tot_distance_s3(blocks, distance, population, loadingSites, 
+                    capacity, supplies, labor, cost, budget, opening_cost, bigM, max_days_open, popDensity)
                 s3_m1_optsoln.append(b, op_co, truePop)
                 
                 ## List of Tuples #2 - pods open for number of days
