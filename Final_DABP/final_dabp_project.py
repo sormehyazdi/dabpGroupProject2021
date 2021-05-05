@@ -205,7 +205,7 @@ def run_scenario_one(opening_cost, budget, bigM):
     for b in budget:
         for op_co in opening_cost:
             try:
-                print("*********** We are at budget:", b)
+                print("*********** We are at budget:", b, " - Model 1")
             ### Model 1
                 (m1_opt_solution, lst, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, 
                     population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
@@ -240,7 +240,7 @@ def run_scenario_one(opening_cost, budget, bigM):
     for b in budget:
         for op_co in opening_cost:
             try:
-                print("*********** We are at budget:", b)
+                print("*********** We are at budget:", b, " - Model 2")
             ### Model 2
                 (m2_opt_solution, pod_days_m2, block_dist_m2) = min_max_distance(pod_sites, blocks, distance, 
                     population, loadingSites, capacity, supplies, labor, cost, b, op_co, bigM, max_days_open)
@@ -319,14 +319,14 @@ def run_scenario_two():
     ## Loop through budget values, then opening cost to find optimal solutions 
     for b in budget:
         try:
-        	print("*********** We are at budget:", b)
-            (m1_opt_solution, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, 
-                population, loadingSites, capacity, supplies, labor, cost, b, opening_cost, bigM, max_days_open)
+            print("*********** We are at budget:", b, " - Scenario 2 Model 1")
+            (m1_opt_solution, lst, pod_days, block_dist) = min_tot_distance(pod_sites, blocks, distance, population, 
+                loadingSites, capacity, supplies, labor, cost, b, opening_cost, bigM, max_days_open)
             good_options.append((m1_opt_solution))
 
-        	## First we make a list of the budget, opening cost, and optimal solution for that pair
+            ## First we make a list of the budget, opening cost, and optimal solution for that pair
             s2_m1_optsoln.append((b, opening_cost, m1_opt_solution))
-        	## List of Tuples #2
+            ## List of Tuples #2
             m1_pods = [(b, opening_cost, pitts_pods_idx[pod[0]], pod[1]) for pod in pod_days]
             #s1_m1_pods.extend(m1_pods)
             s2_m1_pods = s2_m1_pods + m1_pods
@@ -345,9 +345,10 @@ def run_scenario_two():
     #print("*** THESE ARE THE GOOD OPTIONS: \n", good_options)
 
     ## Save these to csv so that plotting can be done without running everything
-    s2_m1_opt_vals_df.to_csv(path + 's2_m1_optimalVals.csv', encoding = 'utf-8')
-    s2_m1_pods_df.to_csv(path + 's2_m1_podDays.csv', encoding = 'utf-8')
-    s2_m1_dist_df.to_csv(path + 's2_m1_blockDistances.csv', encoding = 'utf-8')
+    s2_m1_opt_vals_df.to_csv('s2_m1_optimalVals.csv', encoding = 'utf-8')
+    s2_m1_pods_df.to_csv('s2_m1_podDays.csv', encoding = 'utf-8')
+    s2_m1_dist_df.to_csv('s2_m1_blockDistances.csv', encoding = 'utf-8')
+    print("Saved Scenario 2 model 1 dataframes to csv...")
 
     ### Model 2
     s2_m2_optsoln = []
@@ -358,14 +359,14 @@ def run_scenario_two():
     ## Loop through budget values, then opening cost to find optimal solutions 
     for b in budget:
         try:
-        	print("*********** We are at budget:", b)
-            (m2_opt_solution, lst, pod_days, block_dist) = min_max_distance(pod_sites, blocks, distance, 
-                population, loadingSites, capacity, supplies, labor, cost, b, opening_cost, bigM, max_days_open)
-            good_options.append((m2_opt_solution, lst))
+            print("*********** We are at budget:", b, " - Scenario 2 Model 2")
+            (m2_opt_solution, pod_days, block_dist) = min_max_distance(pod_sites, blocks, distance, population, 
+                loadingSites, capacity, supplies, labor, cost, b, opening_cost, bigM, max_days_open)
+            good_options.append((m2_opt_solution))
 
-        	## First we make a list of the budget, opening cost, and optimal solution for that pair
+            ## First we make a list of the budget, opening cost, and optimal solution for that pair
             s2_m2_optsoln.append((b, opening_cost, m2_opt_solution))
-        	## List of Tuples #2
+            ## List of Tuples #2
             m2_pods = [(b, opening_cost, pitts_pods_idx[pod[0]], pod[1]) for pod in pod_days]
             s2_m2_pods = s2_m2_pods + m2_pods
             m2_dist = [(b, opening_cost, pgh_blocks_idx.astype(int)[bdist[0]], bdist[1],  pitts_pods_idx[bdist[2]]) for bdist in block_dist]
@@ -384,6 +385,7 @@ def run_scenario_two():
     s2_m2_opt_vals_df.to_csv(path + 's2_m2_optimalVals.csv', encoding = 'utf-8')
     s2_m2_pods_df.to_csv(path + 's2_m2_podDays.csv', encoding = 'utf-8')
     s2_m2_dist_df.to_csv(path + 's2_m2_blockDistances.csv', encoding = 'utf-8')
+    print("Saved Scenario 2 model 2 dataframes to csv...")
 
     return(s2_m1_opt_vals_df, s2_m1_pods_df, s2_m1_dist_df, s2_m2_opt_vals_df, s2_m2_pods_df, s2_m2_dist_df)
 
@@ -394,7 +396,7 @@ def main():
     budget = [750000, 1000000, 1250000, 1500000, 1750000, 2000000, 2250000, 2500000, 5000000]
     
     bigM = 100000000000000000000 ## This is our big M
-
+    
     #### Scenario 1
     (s1_m1_opt_vals_df, s1_m1_pods_df, s1_m1_dist_df, s1_m2_opt_vals_df, s1_m2_pods_df, s1_m2_dist_df) = run_scenario_one(opening_cost, budget, bigM)
     ### Model 1
@@ -405,7 +407,7 @@ def main():
     print("*** Scenario 1 - Model 2 - Optimal Total Distance: \n", s1_m2_opt_vals_df)
     print("*** Scenario 1 - Model 2 - POD Days Open: \n", s1_m2_pods_df)
     print("*** Scenario 1 - Model 2 - Block Distance Traveled: \n", s1_m2_dist_df)
-
+    
     #### Scenario 2
     (s2_m1_opt_vals_df, s2_m1_pods_df, s2_m1_dist_df, s2_m2_opt_vals_df, s2_m2_pods_df, s2_m2_dist_df) = run_scenario_two()
     ### Model 1
