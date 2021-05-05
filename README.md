@@ -64,4 +64,8 @@ Contains the outputfiles created by `final_dabp_project.py`
 - s2_m2_optimalVals.csv
 - s2_m2_podDays.csv
 
-### V1
+### V1_DABP_Code
+Our first round of coding - can be ignored
+
+### V2_DABP_Code
+Most of our work lives in this directory. Many different iterations of the code, in many different files, along with all the csv files necessary.
