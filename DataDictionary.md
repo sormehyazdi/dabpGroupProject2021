@@ -2,7 +2,7 @@
 This file explains both the data that was obtained and used to build our models, and the data produced from our models.
 
 **Data Sources**
-- [Distances.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/Distances.csv) *list of distances between the census blocks and the POD sites (Size: 1100 x 47)*\
+- <u>[Distances.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/Distances.csv) *list of distances between the census blocks and the POD sites (Size: 1100 x 47)*</u>\
 The data for this file was generated using [shapefiles](https://www.census.gov/cgi-bin/geo/shapefiles/index.php) for Allegheny County census block groups provided to the public via the U.S. Census Bureau. These shapefiles were uploaded to ArcGIS Pro and then the "Feature to Point" tool to calculate the centroid for each census block. We then also uploaded a list of 47 POD sites provided by our CMU professor and used the "Geocode Addresses" tool in ArcGIS Pro to generate a point for each POD. The "OD Cost Matrix" tool in ArcgIS online was then used to calculate the straight-line distance between each pair of census block group centroid and POD site, generating the resulting matrix.
 - [Labor.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/Labor.csv) *list of cost of labor at each POD site per hour of operation (Size: 47 x 1)*\
 These estimates were based on the expected operational size/scale of each POD (i.e., the number of loading sites at each POD), and friends and family members who work in the healthcare sector provided insight to help us determine how many staff with each experience level would be required to operate PODs of various sizes.
