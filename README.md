@@ -11,7 +11,8 @@ This repository contains three directories:
 - Final_DABP
 
 ### Final_DABP
-This directory contains the files necessary to run `final_dabp_project.py` and the csv files necessary to run the script.
+This directory contains the files necessary to run `final_dabp_project.py` and the csv files necessary to run the script. It also contains jupyter notebook files that create figures used for further analysis of the model results. 
+
 Files necessary to run `final_dabp_project.py`:
 - Distances.csv: lists distances between the census blocks and the POD sites (1100 x 47)
 - Labor.csv: list of cost of labor at each POD site (47 x 1)
@@ -62,6 +63,13 @@ Contains the outputfiles created by `final_dabp_project.py`
 - s2_m2_blockDistances.csv
 - s2_m2_optimalVals.csv
 - s2_m2_podDays.csv
+
+#### ipynb Files
+These files make use of the .csv files found in the OutputFiles directory. In order to run the following files, they *must* be in the same directory as the output files. 
+- s1_m1_distance.ipynb
+- s1_m2_distance.ipynb
+- s2_m1_distance.ipynb
+- s2_m2_distance.ipynb
 
 ### V1_DABP_Code
 Our first round of coding - can be ignored
