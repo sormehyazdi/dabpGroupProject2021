@@ -21,7 +21,7 @@ This file was ultimately omitted from our model as we decided not to weight dist
 
 ### Model-Generated Data [(Output Files)](https://github.com/sormehyazdi/dabpGroupProject2021/tree/main/Final_DABP/OutputFiles)
 **Nomenclature**\
-Our output files follow a consistent nomenclature in which the first two characters ("s1" or "s2") correlate with the scenario (where "s1" = a global outbreak, i.e. all of Allegheny County is considered and "s2" = a local outbreak, i.e. only Pittsburgh is considered). The second term ("m1" or "m2") corresponds to the model, whereby m1 = a minimization of the total distance traveled and m2 = a minimum of the maximum distance traveled by any single block group. The terms at the end of the file is a description of the data contained in that file. Each scenario - model combination has three file types, which are largely the same.
+Our output files follow a consistent nomenclature in which the first two characters ("s1" or "s2") correlate with the scenario (where "s1" = a global outbreak, i.e. all of Allegheny County is considered and "s2" = a local outbreak, i.e. only Pittsburgh is considered). The second term ("m1" or "m2") corresponds to the model, whereby m1 = a minimization of the total distance traveled and m2 = a minimum of the maximum distance traveled by any single block group. The term at the end of the file is a description of the data contained in that file. Each scenario - model combination has three file types, which are largely the same.
 
 Each combination of scenario and model has the following three file types: *blockDistances, optimalVals, and podDays.*
 
