@@ -1,7 +1,7 @@
-## Data Dictionary
+# Data Dictionary
 This file explains both the data that was obtained and used to build our models, and the data produced from our models.
 
-# Data Sources
+### Data Sources
 - **[Distances.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/Distances.csv) list of distances between the census blocks and the POD sites (Size: 1100 x 47)**\
 The data for this file was generated using [shapefiles](https://www.census.gov/cgi-bin/geo/shapefiles/index.php) for Allegheny County census block groups provided to the public via the U.S. Census Bureau. These shapefiles were uploaded to ArcGIS Pro and then the "Feature to Point" tool to calculate the centroid for each census block. We then also uploaded a list of 47 POD sites provided by our CMU professor and used the "Geocode Addresses" tool in ArcGIS Pro to generate a point for each POD. The "OD Cost Matrix" tool in ArcgIS online was then used to calculate the straight-line distance between each pair of census block group centroid and POD site, generating the resulting matrix.
 - **[Labor.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/Labor.csv) list of cost of labor at each POD site per hour of operation (Size: 47 x 1)**\
@@ -18,7 +18,7 @@ This file includes all PODs located inside of the City of Pittsburgh boundary an
 - **[popDens.csv:](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/popDens.csv) dataframe of population and population density of each census block (Size: 1100 x 3)**\
 This file was ultimately omitted from our model as we decided not to weight distances by population density (which would follow a density-dependent model of virulence where individuals living in greater population-dense areas are prioritized with closer PODs, on average). These values were calculated by dividing the estimated population size by the land area of the census block group and multiplied by 100. Thus, the units are in "people per 100 square meters."
 
-# Model-Generated Data [(Output Files)](https://github.com/sormehyazdi/dabpGroupProject2021/tree/main/Final_DABP/OutputFiles)
+### Model-Generated Data [(Output Files)](https://github.com/sormehyazdi/dabpGroupProject2021/tree/main/Final_DABP/OutputFiles)
 - [s1_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
 - [s1_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_optimalVals.csv) lists budget, cost, and optimal total distance traveled (miles) (9 x 3)
 - [s1_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (422 x 4)
