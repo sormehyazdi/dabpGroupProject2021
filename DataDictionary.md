@@ -19,6 +19,9 @@ This file includes all PODs located inside of the City of Pittsburgh boundary an
 This file was ultimately omitted from our model as we decided not to weight distances by population density (which would follow a density-dependent model of virulence where individuals living in greater population-dense areas are prioritized with closer PODs, on average). These values were calculated by dividing the estimated population size by the land area of the census block group and multiplied by 100. Thus, the units are in "people per 100 square meters."
 
 ### Model-Generated Data [(Output Files)](https://github.com/sormehyazdi/dabpGroupProject2021/tree/main/Final_DABP/OutputFiles)
+blockDistances =\
+optimalVals =\
+podDays =\
 - [s1_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
 - [s1_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_optimalVals.csv) lists budget, cost, and optimal total distance traveled (miles) (9 x 3)
 - [s1_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (422 x 4)
