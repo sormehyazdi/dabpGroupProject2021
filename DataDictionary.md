@@ -25,13 +25,13 @@ optimalVals =\
 podDays =\
 - [s1_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
 - [s1_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_optimalVals.csv) lists budget, cost, and optimal total distance traveled (miles) (9 x 3)
-- [s1_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (422 x 4)
-- [s1_m2_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_blockDistances.csv)
-- [s1_m2_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_optimalVals.csv)
-- [s1_m2_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_podDays.csv)
-- [s2_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_blockDistances.csv)
-- [s2_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_optimalVals.csv)
-- [s2_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_podDays.csv)
-- [s2_m2_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_blockDistances.csv)
-- [s2_m2_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_optimalVals.csv)
-- [s2_m2_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_podDays.csv)
+- [s1_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (424 x 4)
+- [s1_m2_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
+- [s1_m2_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_optimalVals.csv) lists budget, cost, and optimal (minimax) distance traveled by the census block that must travel the furthest.
+- [s1_m2_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m2_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (424 x 4)
+- [s2_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
+- [s2_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_optimalVals.csv) lists budget, cost, and optimal total distance traveled (miles)
+- [s2_m1_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m1_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (89 x 4)
+- [s2_m2_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9899 x 5)
+- [s2_m2_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_optimalVals.csv) lists budget, cost, and optimal (minimax) distance traveled by the census block that must travel the furthest.
+- [s2_m2_podDays.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s2_m2_podDays.csv) lists budget, cost, POD #, number of days the POD remains open (89 x 4)
