@@ -20,11 +20,10 @@ This file includes all PODs located inside of the City of Pittsburgh boundary an
 This file was ultimately omitted from our model as we decided not to weight distances by population density (which would follow a density-dependent model of virulence where individuals living in greater population-dense areas are prioritized with closer PODs, on average). These values were calculated by dividing the estimated population size by the land area of the census block group and multiplied by 100. Thus, the units are in "people per 100 square meters."
 
 ### Model-Generated Data [(Output Files)](https://github.com/sormehyazdi/dabpGroupProject2021/tree/main/Final_DABP/OutputFiles)
-*Nomenclature*
-Our output files follow a consistent nomenclature in which the first two characters ("s1" or "s2") correlate with the scenario (where "s1" = a global outbreak, i.e. all of Allegheny County is considered and "s2" = a local outbreak, i.e. only Pittsburgh is considered).\
-The second term ("m1" or "m2") corresponds to the model, whereby m1 = a minimization of the total distance traveled and m2 = a minimum of the maximum distance traveled by any single block group.\
-The terms at the end of the file is a description of the data contained in that file. Each scenario - model combination has three file types, which are largely the same.\
-These file types are: blockDistances, optimalVals, and podDays.
+**Nomenclature**\
+Our output files follow a consistent nomenclature in which the first two characters ("s1" or "s2") correlate with the scenario (where "s1" = a global outbreak, i.e. all of Allegheny County is considered and "s2" = a local outbreak, i.e. only Pittsburgh is considered). The second term ("m1" or "m2") corresponds to the model, whereby m1 = a minimization of the total distance traveled and m2 = a minimum of the maximum distance traveled by any single block group. The terms at the end of the file is a description of the data contained in that file. Each scenario - model combination has three file types, which are largely the same.\
+
+Each combination of scenario and model has the following three file types: *blockDistances, optimalVals, and podDays.*
 
 - [s1_m1_blockDistances.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_blockDistances.csv) lists budget, cost, block, distances traveled (miles), and designated POD for each budget simulation (9901 x 5)
 - [s1_m1_optimalVals.csv](https://github.com/sormehyazdi/dabpGroupProject2021/blob/main/Final_DABP/OutputFiles/s1_m1_optimalVals.csv) lists budget, cost, and optimal total distance traveled (miles) (10 x 3)
