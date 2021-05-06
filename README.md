@@ -5,10 +5,12 @@ Team: Ali Iftikhar (aliiftik), Pooja Puvvadi (ppuvvadi), Jeffrey Scanlon (jscanl
 Date: May, 2021
 Course: Decision Analytics for Public Policy
 
-This repository contains three directories:
-- V1_DABP_Code
-- V2_DABP_Code
-- Final_DABP
+This repository contains three directories and 2 files:
+- V1_DABP_Code/
+- V2_DABP_Code/
+- Final_DABP/
+- DataDictionary.md
+- README.md
 
 ### Final_DABP
 This directory contains the files necessary to run `final_dabp_project.py` and the csv files necessary to run the script. It also contains jupyter notebook files that create figures used for further analysis of the model results. 
@@ -70,6 +72,9 @@ These files make use of the .csv files found in the OutputFiles directory. In or
 - s1_m2_distance.ipynb
 - s2_m1_distance.ipynb
 - s2_m2_distance.ipynb
+
+### DataDictionary.md
+Provides a more detailed description of the input used and output files generated for this project.
 
 ### V1_DABP_Code
 Our first round of coding - can be ignored
